@@ -190,7 +190,6 @@ def setup_state(state):
         setup_crash()
     else:
         setup_game_end()#Setting up the ending of the game
-    return
 
 setup_state(State.START)# start the game in the START STATE  
  
