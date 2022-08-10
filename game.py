@@ -36,7 +36,7 @@ def asteroid_move():
     global BLOCK_FLAG, animations
     if not SpaceObject.BLOCK_FLAG:
         SpaceObject.BLOCK_FLAG = True
-        SpaceObject.POSITION = random.randint(100,570)#Randomly throwing asteroids in any position on the screen
+        SpaceObject.POSITION = random.randint(60,600)#Randomly throwing asteroids in any position on the screen
         lane = SpaceObject.POSITION
         asteroid = Actor("asteroid",(lane,-64))#Making asteroid actors
         SpaceObject.MOVING.append((asteroid,lane))#Making the asteroids move
@@ -114,10 +114,10 @@ def update_run():
    
     if keyboard.right:#Defining the right key
         animate(SpaceObject.player,duration = 0.5,angle = -20)
-        SpaceObject.player.x = min(477,SpaceObject.player.x+2)
+        SpaceObject.player.x = min(677,SpaceObject.player.x+2)
     elif keyboard.left:#Defining the left key
          animate(SpaceObject.player,duration = 0.5,angle = 20)
-         SpaceObject.player.x = max(SpaceObject.player.x-2,291)
+         SpaceObject.player.x = max(SpaceObject.player.x-2,91)
     elif keyboard.up:#Defining the up key
         SpaceObject.player.y -=2
     elif keyboard.down:#Defining the down key
