@@ -1,5 +1,5 @@
 import os
-from turtle import left
+from turtle import bgcolor, left
 os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (300,250)#This section allows setting the window position on the monitor
 
 from guizero import App, Text, TextBox, Box, PushButton, Picture
@@ -80,13 +80,17 @@ def setup_start():
  
     x = App(layout="grid", width=350) # Making a new window grid for the game
     x.when_closed = clicked
-    x.bg = "white"
+    x.bg = "black"
     logo = Picture(x, image="images/spaceEscapeLogo.png", grid=[0,0], align = "right")
-    label = Text(x, text="Enter your Name: ",grid=[0,1],size=fontSize, align="left")#Putting some text into the game
+    label = Text(x, text="Enter your Name: ",grid=[0,1],size=fontSize, align="left")#Putting the text for you to enter your name
+    label.text_color = "#ffffff"
     name = TextBox(x, grid=[0,1], width=12, align="right")#Making a textbox for you to type your name in
+    name.text_color = "#ffffff"
     name.text_size = fontSize
-    howToPageText = Text(x, text="\n\nHow to play this game:\n\nUse arrow keys to move the rocket,\ndodge the asteroids, and score points.\n\n",grid=[0,8],size=fontSize)#Making the how to play page
+    howToPlayText = Text(x, text="\n\nHow to play the game:\n\nUse arrow keys to move the rocket,\ndodge the asteroids, and score points.\n\n",grid=[0,8],size=fontSize)#Making the how to play page
+    howToPlayText.text_color = '#ffffff'
     startButton = PushButton(x,text="Start the Game!",grid=[0,16], command=clicked)#Making a button to start the game
+    startButton.bg = "#4db6f7"
     startButton.text_size=fontSize
     name.focus()
     x.display()#Displaying the window
@@ -147,7 +151,7 @@ def changetoend():
     setup_state(State.GAME_END)#Programming the game end code
    
 def setup_game_end():
-    fontSize = 14
+    fontSize = 23
     player = SpaceObject.playerName#Assigning the player name to the variable
  
     def restart():
@@ -159,18 +163,22 @@ def setup_game_end():
  
     x = App(layout="grid")#Making the game window
     x.when_closed = closeGame
+    x.bg = "black"
  
     leaderScores = [("Jenine",91), ("Rian",76), ("Joe", 43)]#Setting up a leaderboard
     leaderScores.append((player, SpaceObject.passed - 3))#Appending your name and score
     leaderScores.sort(key=lambda i: i[1], reverse=True)#Sorting the list by your score
- 
     board = Box(x, grid = [1,1],border=2)#Making the board
+    board.bg = "#221178"
     heading = Text(board,"Leaderboard", size=fontSize)#Making the heading for the leaderboard
+    heading.text_color = "white"
     for leaderScore in leaderScores:
          t = Text(board, text=f'{leaderScore[0]}\t{leaderScore[1]}', size=fontSize)#Displaying the names and scores on the leaderboard
-
-    restartButton = PushButton(x,text="Reset Game",grid=[8,5],command=restart)#Making a button to restart the game
-    endButton = PushButton(x, text="End Game", grid=[4,5], command=exit)#Making a button to exit the game
+         t.text_color = "white"
+    restartButton = PushButton(x,text="Reset Game",grid=[1,6],command=restart, align = "left")#Making a button to restart the game
+    restartButton.bg = "#11736e"
+    endButton = PushButton(x, text="End Game", grid=[1,6], command=exit, align = "right")#Making a button to exit the game
+    endButton.bg = "#732d11"
     x.display()#Running the game
  
 def setup_state(state):
