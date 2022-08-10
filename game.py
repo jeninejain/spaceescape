@@ -34,7 +34,7 @@ HEIGHT=600
 
 def asteroid_move():
     global BLOCK_FLAG, animations
-    if not SpaceObject.BLOCK_FLAG:
+    if not SpaceObject.BLOCK_FLAG:#Making sure the asteroids don't go out of the borders
         SpaceObject.BLOCK_FLAG = True
         SpaceObject.POSITION = random.randint(60,600)#Randomly throwing asteroids in any position on the screen
         lane = SpaceObject.POSITION
@@ -126,11 +126,11 @@ def update_run():
          animate(SpaceObject.player,duration=.1, angle = 0.0)
            
 # Collision and passed asteroids routine
-    for asteroid in SpaceObject.MOVING:
-        if SpaceObject.player.colliderect(asteroid[0]):
-            if len(SpaceObject.COLLISION) == 0:
-                SpaceObject.COLLISION.append((SpaceObject.player,asteroid[0]))
-                clock.schedule(handle_collision,.5)
+    for asteroid in SpaceObject.MOVING:# for loop of asteroids
+        if SpaceObject.player.colliderect(asteroid[0]):#If a rocket hits an asteroid
+            if len(SpaceObject.COLLISION) == 0:#If there aren't any collisions
+                SpaceObject.COLLISION.append((SpaceObject.player,asteroid[0]))#Adding the asteroid that the rocket hit to the list of collided asteroids
+                clock.schedule(handle_collision,.5)#Making sure it is on time
                 break
  
 def draw_run():
