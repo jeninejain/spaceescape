@@ -2,7 +2,7 @@ import os
 from turtle import left
 os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (300,250)#This section allows setting the window position on the monitor
 
-from guizero import App, Text, TextBox, Box, PushButton
+from guizero import App, Text, TextBox, Box, PushButton, Picture
 #skeleton for game states
 from enum import Enum
 import pgzrun
@@ -40,7 +40,7 @@ def asteroid_move():
         lane = SpaceObject.POSITION
         asteroid = Actor("asteroid",(lane,-64))#Making asteroid actors
         SpaceObject.MOVING.append((asteroid,lane))#Making the asteroids move
-        SpaceObject.animations.append(animate(asteroid,pos=(lane,HEIGHT//3),duration=.8,
+        SpaceObject.animations.append(animate(asteroid,pos=(lane, HEIGHT//3),duration=.8,
                 on_finished=finish_move))#Adding it to the list of asteroids
  
 def finish_move():
@@ -78,10 +78,12 @@ def setup_start():
         setup_state(State.RUN)#Uploading the game into setup_state()
         x.destroy()#Destroying the main window
  
-    x = App(layout="grid")#Making a new window grid for the game
+    x = App(layout="grid", width=350) # Making a new window grid for the game
     x.when_closed = clicked
-    label = Text(x, text="Enter your Name: ",grid=[0,0],size=fontSize)#Putting some text into the game
-    name = TextBox(x,grid=[1,0], width=15)#Making a textbox for you to type your name in
+    x.bg = "white"
+    logo = Picture(x, image="images/spaceEscapeLogo.png", grid=[0,0], align = "right")
+    label = Text(x, text="Enter your Name: ",grid=[0,1],size=fontSize, align="left")#Putting some text into the game
+    name = TextBox(x, grid=[0,1], width=12, align="right")#Making a textbox for you to type your name in
     name.text_size = fontSize
     howToPageText = Text(x, text="\n\nHow to play this game:\n\nUse arrow keys to move the rocket,\ndodge the asteroids, and score points.\n\n",grid=[0,8],size=fontSize)#Making the how to play page
     startButton = PushButton(x,text="Start the Game!",grid=[0,16], command=clicked)#Making a button to start the game
